@@ -17,7 +17,7 @@ export function HeaderNavBar() {
 
 
     return (
-        <Box pb={120} >
+        <Box py={14} className="border-b" bg={'white'}>
             <header className={classes.header}>
                 <Group  justify="space-between" h="100%">
                     <div>DevonDemo</div>
@@ -32,7 +32,7 @@ export function HeaderNavBar() {
                             Products
                         </a>
                     </Group>
-                    <Group visibleFrom="sm">
+                    <Group visibleFrom="sm" gap={4}>
                         <Link to="/login"> <Button variant="default"  >Login</Button></Link>
                         <Link to="/register"> <Button variant="default" >Sign Up</Button></Link>
                     </Group>

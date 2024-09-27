@@ -3,8 +3,9 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/pages/login.tsx';
 import RegisterPage from './components/pages/register.tsx';
-import { createTheme, MantineProvider } from '@mantine/core';
+import { Container, createTheme, MantineProvider } from '@mantine/core';
 import { HeaderNavBar } from './components/molecules/navbar/index.tsx';
+import ForgotPasswordPage from './components/pages/forgot-password.tsx';
 
 
 const theme = createTheme({
@@ -21,10 +22,13 @@ function App() {
       <MantineProvider theme={{ colors: theme.colors, }} withGlobalClasses withCssVariables> 
         <BrowserRouter>
           <HeaderNavBar />
+          <div className='bg-slate-100 py-10'>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           </Routes>
+          </div>
         </BrowserRouter>
       </MantineProvider></>
   )
