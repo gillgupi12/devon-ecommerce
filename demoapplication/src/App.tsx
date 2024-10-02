@@ -3,9 +3,10 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/pages/login.tsx';
 import RegisterPage from './components/pages/register.tsx';
-import { Container, createTheme, MantineProvider } from '@mantine/core';
+import { createTheme, MantineProvider } from '@mantine/core';
 import { HeaderNavBar } from './components/molecules/navbar/index.tsx';
 import ForgotPasswordPage from './components/pages/forgot-password.tsx';
+import ResetPasswordPage from './components/pages/reset-password.tsx';
 
 
 const theme = createTheme({
@@ -24,9 +25,10 @@ function App() {
           <HeaderNavBar />
           <div className='bg-slate-100 py-10'>
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/login" Component={LoginPage} />
+            <Route path="/register" Component={RegisterPage} />
+            <Route path="/forgot-password" Component={ForgotPasswordPage} />
+            <Route path="/reset-password/:token"  Component={ResetPasswordPage} />
           </Routes>
           </div>
         </BrowserRouter>
