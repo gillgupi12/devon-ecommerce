@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { TextInput } from '@mantine/core';
 import CustomButton from '../atoms/button';
 import { Container } from '@mantine/core';
-import api from '../../api/auth/index'
+import api from '../../api/auth'
 
 const RegisterPage: React.FC = () => {
 

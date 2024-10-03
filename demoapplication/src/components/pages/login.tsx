@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TextInput } from '@mantine/core';
 import CustomButton from '../atoms/button';
-import api from '../../api/auth/index'
+import api from '../../api/auth'
 import { Container } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
