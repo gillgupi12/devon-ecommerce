@@ -1,25 +1,107 @@
-import { useState } from 'react';
-import { TextInput } from '@mantine/core';
+import { Group, TextInput } from '@mantine/core';
 import CustomButton from '../atoms/button';
 import { Container } from '@mantine/core';
 import api from '../../api/auth'
+import { useForm } from '@mantine/form';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { notifications } from '@mantine/notifications';
+import { isRegisterResponse } from '../../utils/responses';
 
 const RegisterPage: React.FC = () => {
 
-    const [username, setUserName] = useState('')
-    const [password, setPassword] = useState('')
-    const [firstName, setFirstname] = useState('')
-    const [lastName, setLastname] = useState('')
-    const [email, setEmail] = useState('')
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+    const navigate = useNavigate()
+
+    const form = useForm({
+        mode: 'uncontrolled',
+        initialValues: {
+            username: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            email: ''
+
+        },
+        validate: {
+            username: (value) => {
+                if (!value) return 'Please input username';
+                if (value.length < 6) return 'Username must be at least 6 characters long';
+                return null;
+            },
+            password: (value) => {
+                if (!value) return 'Please input password';
+                if (value.length < 6) return 'Password must be at least 6 characters long';
+                return null;
+            },
+            firstName: (value) => {
+                if (!value) return 'Please input first name';
+                if (value.length < 2) return 'First name must be at least 2 characters long';
+                return null;
+            },
+            lastName: (value) => {
+                if (!value) return 'Please input last name';
+                if (value.length < 2) return 'Last name must be at least 2 characters long';
+                return null;
+            },
+            email: (value) => {
+                if (!value) return 'Please input email';
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    return 'Please input a valid email address';
+                }
+                return null;
+            }
+        },
+    });
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
-        try {
-            const response = await api.register({ userName: username, password, firstName, lastName, email })
-            console.log(response)
-        } catch (err) {
-            console.log(err)
+        setLoading(true)
+        form.validate();
+        if (form.isValid()) {
+            try {
+                const response = await api.register({
+                    userName: form.getValues().username,
+                    password: form.getValues().password,
+                    firstName: form.getValues().firstName,
+                    lastName: form.getValues().lastName,
+                    email: form.getValues().email
+                })
+                if ('error' in response) {
+                    setErrorMessage(response.message);
+                    notifications.show({
+                        title: 'Error',
+                        message: `${response.message}`,
+                        position: 'top-right',
+                        color: 'red'
+                    })
+
+                } else if (isRegisterResponse(response)) {
+                    setErrorMessage(null);
+                    navigate('/')
+                    notifications.show({
+                        title: 'Success',
+                        message: `Welcome ${response.user.userName}!`,
+                        position: 'top-right',
+                        color: 'green'
+                    })
+
+                }
+
+            } catch (err) {
+                setErrorMessage('An unexpected error occurred. Please try again later.');
+                notifications.show({
+                    title: 'Error',
+                    message: 'An unexpected error occurred. Please try again later.',
+                    position: 'top-right',
+                    color: 'red'
+                })
+            }
         }
+        setLoading(false)
+
     }
     return (
         <>
@@ -31,37 +113,34 @@ const RegisterPage: React.FC = () => {
                         placeholder="First name"
                         type='text'
                         className='flex-grow'
-                        value={firstName}
-                        onChange={(event) => setFirstname(event.target.value)}
+                        {...form.getInputProps('firstName')}
                     />
                     <TextInput label="Last name"
                         placeholder="Last name"
                         className='flex-grow'
                         type='text'
-                        value={lastName}
-                        onChange={(event) => setLastname(event.target.value)}
+                        {...form.getInputProps("lastName")}
                     />
 
                     <TextInput label="Email"
                         placeholder="Email"
                         className='flex-grow'
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
+                        {...form.getInputProps("email")}
                     />
                     <TextInput label="Username"
                         placeholder="Username"
-                        value={username}
-                        onChange={(event) => setUserName(event.target.value)}
+                        {...form.getInputProps("username")}
                     />
                     <TextInput label="Password"
                         placeholder="Password"
                         type='password'
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
+                        {...form.getInputProps("password")}
                     />
-                    <div className="flex justify-end">
-                        <CustomButton type="submit" color={'black'} >Register</CustomButton>
-                    </div>
+                    <small className="text-red-500">{errorMessage}</small>
+                    <Group justify='flex-end'>
+                        <CustomButton loading={loading} disabled={loading} type="submit" className='w-1/4' color={'black'} > {loading ? 'Registering..' : 'Register'}</CustomButton>
+                    </Group>
+
                 </form>
             </Container>
         </>

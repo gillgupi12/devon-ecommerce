@@ -1,20 +1,73 @@
 import { useState } from 'react';
-import { TextInput } from '@mantine/core';
+import { Group, TextInput } from '@mantine/core';
 import CustomButton from '../atoms/button';
 import { Container } from '@mantine/core';
 import api from '../../api/auth'
+import { useForm } from '@mantine/form';
+import { notifications } from '@mantine/notifications';
+import { isForgotPasswordResponse } from '../../utils/responses';
 
 const ForgotPasswordPage: React.FC = () => {
-    const [email, setEmail] = useState('')
+
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const form = useForm({
+        mode: 'uncontrolled',
+        initialValues:{
+            email: ''
+        },
+        validate: {
+            email: (value) => {
+                if (!value) return 'Please input email';
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    return 'Please input a valid email address';
+                }
+                return null;
+            }
+        }
+    })
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
-        try {
-            const response = await api.forgotPassword({ email: email })
-            console.log(response)
-        } catch (err) {
-            console.log(err)
+        setLoading(true)
+        form.validate();
+        if (form.isValid()) {
+            try {
+                const response = await api.forgotPassword({ email: form.getValues().email, })
+                console.log(response)
+                if ('error' in response) {
+                    setErrorMessage(response.message);
+                    notifications.show({
+                        title: 'Error',
+                        message: `${response.message}`,
+                        position: 'top-right',
+                        color: 'red'
+                    })
+
+                } else if (isForgotPasswordResponse(response)) {
+                    setErrorMessage(null);
+                    notifications.show({
+                        title: 'Success',
+                        message: `${response.message}, Please check your email and follow the instructions to reset your password!`,
+                        position: 'top-right',
+                        color: 'green'
+                    })
+
+                }
+            } catch (err) {
+                setErrorMessage('An unexpected error occurred. Please try again later.');
+                notifications.show({
+                    title: 'Error',
+                    message: 'An unexpected error occurred. Please try again later.',
+                    position: 'top-right',
+                    color: 'red'
+                })
+            }
         }
+        setLoading(false)
     }
+
     return (
         <>
             <Container size={'xs'} py={35} bg={'white'} className='border rounded'>
@@ -23,12 +76,12 @@ const ForgotPasswordPage: React.FC = () => {
                 <form onSubmit={handleSubmit} className='space-y-2'>
                     <TextInput label="Email"
                         placeholder="Email"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
+                        {...form.getInputProps('email')}
                     />
-                    <div className="flex justify-end">
-                        <CustomButton type="submit" color={'black'} >Reset Password</CustomButton>
-                    </div>
+                     <small className="text-red-500">{errorMessage}</small>
+                    <Group justify="flex-end">
+                    <CustomButton loading={loading} disabled={loading} type="submit"  color={'black'} > {loading ? 'Loading..' : 'Reset Password'}</CustomButton>
+                    </Group>
 
                 </form>
             </Container>

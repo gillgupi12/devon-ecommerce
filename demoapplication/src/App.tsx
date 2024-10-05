@@ -7,6 +7,8 @@ import { createTheme, MantineProvider } from '@mantine/core';
 import { HeaderNavBar } from './components/molecules/navbar/index.tsx';
 import ForgotPasswordPage from './components/pages/forgot-password.tsx';
 import ResetPasswordPage from './components/pages/reset-password.tsx';
+import { Notifications } from '@mantine/notifications';
+import profilePage from './components/pages/profile.tsx';
 
 
 const theme = createTheme({
@@ -20,16 +22,18 @@ const theme = createTheme({
 function App() {
   return (
     <>
-      <MantineProvider theme={{ colors: theme.colors, }} withGlobalClasses withCssVariables> 
+      <MantineProvider theme={{ colors: theme.colors, }} withGlobalClasses withCssVariables>
+        <Notifications />
         <BrowserRouter>
           <HeaderNavBar />
           <div className='bg-slate-100 py-10'>
-          <Routes>
-            <Route path="/login" Component={LoginPage} />
-            <Route path="/register" Component={RegisterPage} />
-            <Route path="/forgot-password" Component={ForgotPasswordPage} />
-            <Route path="/reset-password/:token"  Component={ResetPasswordPage} />
-          </Routes>
+            <Routes>
+              <Route path="/login" Component={LoginPage} />
+              <Route path="/register" Component={RegisterPage} />
+              <Route path="/forgot-password" Component={ForgotPasswordPage} />
+              <Route path="/reset-password/:token" Component={ResetPasswordPage} />
+              <Route path="/profile/:userId" Component={profilePage} />
+            </Routes>
           </div>
         </BrowserRouter>
       </MantineProvider></>
