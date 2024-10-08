@@ -34,7 +34,7 @@ export interface ErrorResponse {
     error?: string; // Optional for additional error details
 }
 
-export interface UserResponse extends User { }
+export type UserResponse = User
 
 export interface LoginResponse {
     token: string;
