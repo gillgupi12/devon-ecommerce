@@ -1,12 +1,12 @@
 import { Group, TextInput } from '@mantine/core';
-import CustomButton from '../atoms/button';
+import CustomButton from '../../atoms/button';
 import { Container } from '@mantine/core';
-import api from '../../api/auth'
+import api from '../../../api/auth'
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
-import { isRegisterResponse } from '../../utils/responses';
+import { isRegisterResponse } from '../../../utils/responses';
 
 const RegisterPage: React.FC = () => {
 

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Group, TextInput } from '@mantine/core';
-import CustomButton from '../atoms/button';
+import CustomButton from '../../atoms/button';
 import { Container } from '@mantine/core';
-import api from '../../api/auth'
+import api from '../../../api/auth'
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
-import { isForgotPasswordResponse } from '../../utils/responses';
+import { isForgotPasswordResponse } from '../../../utils/responses';
 
 const ForgotPasswordPage: React.FC = () => {
 

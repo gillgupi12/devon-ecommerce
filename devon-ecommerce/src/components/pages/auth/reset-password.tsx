@@ -2,8 +2,8 @@
 import { useParams } from "react-router-dom";
 import { useState } from 'react';
 import { TextInput } from '@mantine/core';
-import CustomButton from '../atoms/button';
-import api from '../../api/auth'
+import CustomButton from '../../atoms/button';
+import api from '../../../api/auth'
 import { Container } from '@mantine/core';
 
 const ResetPasswordPage: React.FC = () => {

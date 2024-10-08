@@ -1,14 +1,14 @@
 import '@mantine/core/styles.css';
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginPage from './components/pages/login.tsx';
-import RegisterPage from './components/pages/register.tsx';
+import LoginPage from './components/pages/auth/login.tsx';
+import RegisterPage from './components/pages/auth/register.tsx';
 import { createTheme, MantineProvider } from '@mantine/core';
 import { HeaderNavBar } from './components/molecules/navbar/index.tsx';
-import ForgotPasswordPage from './components/pages/forgot-password.tsx';
-import ResetPasswordPage from './components/pages/reset-password.tsx';
+import ForgotPasswordPage from './components/pages/auth/forgot-password.tsx';
+import ResetPasswordPage from './components/pages/auth/reset-password.tsx';
 import { Notifications } from '@mantine/notifications';
-import profilePage from './components/pages/profile.tsx';
+import profilePage from './components/pages/user/profile.tsx';
 
 
 const theme = createTheme({

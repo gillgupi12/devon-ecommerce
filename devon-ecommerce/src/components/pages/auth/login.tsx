@@ -1,13 +1,13 @@
 import {  TextInput } from '@mantine/core';
-import CustomButton from '../atoms/button';
-import api from '../../api/auth'
+import CustomButton from '../../atoms/button';
+import api from '../../../api/auth'
 import { Container } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
-import { isLoginResponse } from '../../utils/responses';
+import { isLoginResponse } from '../../../utils/responses';
 
 
 const LoginPage: React.FC = () => {
