@@ -63,7 +63,7 @@ const LoginPage: React.FC = () => {
     }
     return (
         <>
-            <Container size={'xs'} py={35} bg={'white'} className='border rounded'>
+            <Container size={'xs'} py={35} bg={'white'} className='border rounded my-6'>
                 <p className="text-xl font-semibold pb-4">Log into your Devondemo account</p>
                 <form onSubmit={handleSubmit} className='space-y-3'>
                     <TextInput label="Username"

@@ -70,7 +70,7 @@ const ForgotPasswordPage: React.FC = () => {
 
     return (
         <>
-            <Container size={'xs'} py={35} bg={'white'} className='border rounded'>
+            <Container size={'xs'} py={35} bg={'white'} className='border rounded my-6'>
                 <p className="text-xl font-semibold">Need to reset your password?</p>
                 <p className="text-sm  font-light pb-4 leading-0">No problem. Please type in your account email address and we’ll send you a link to reset your password.</p>
                 <form onSubmit={handleSubmit} className='space-y-2'>

@@ -9,6 +9,9 @@ import ForgotPasswordPage from './components/pages/auth/forgot-password.tsx';
 import ResetPasswordPage from './components/pages/auth/reset-password.tsx';
 import { Notifications } from '@mantine/notifications';
 import profilePage from './components/pages/user/profile.tsx';
+import productPage from './components/pages/product/index.tsx';
+import aboutPage from './components/pages/about/index.tsx';
+import contactPage from './components/pages/contact/index.tsx';
 
 
 const theme = createTheme({
@@ -26,13 +29,16 @@ function App() {
         <Notifications />
         <BrowserRouter>
           <HeaderNavBar />
-          <div className='bg-slate-100 py-10'>
+          <div className='bg-slate-100 '>
             <Routes>
               <Route path="/login" Component={LoginPage} />
               <Route path="/register" Component={RegisterPage} />
               <Route path="/forgot-password" Component={ForgotPasswordPage} />
               <Route path="/reset-password/:token" Component={ResetPasswordPage} />
               <Route path="/profile/:userId" Component={profilePage} />
+              <Route path="/products" Component={productPage} />
+              <Route path="/about" Component={aboutPage} />
+              <Route path="/contact-us" Component={contactPage} />
             </Routes>
           </div>
         </BrowserRouter>

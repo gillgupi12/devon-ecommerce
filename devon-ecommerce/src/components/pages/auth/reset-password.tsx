@@ -47,7 +47,7 @@ const ResetPasswordPage: React.FC = () => {
     return (
         <>
         ok
-            <Container size={'xs'} py={35} bg={'white'} className='border rounded'>
+            <Container size={'xs'} py={35} bg={'white'} className='border rounded my-6'>
                 <p className="text-xl font-semibold pb-4">Reset your password</p>
                 <form onSubmit={handleSubmit} className='space-y-3'>
                     <TextInput label="New Password"

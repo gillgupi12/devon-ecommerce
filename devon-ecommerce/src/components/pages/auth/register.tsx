@@ -105,7 +105,7 @@ const RegisterPage: React.FC = () => {
     }
     return (
         <>
-            <Container size={'xs'} py={35} bg={'white'} className='border rounded'>
+            <Container size={'xs'} py={35} bg={'white'} className='border rounded my-6'>
                 <p className="text-xl font-semibold leading-0">Don't have a devondemo account? Sign Up!</p>
                 <p className="text-sm  font-light pb-4 leading-0">Let's get started! </p>
                 <form onSubmit={handleSubmit} className='space-y-3 '>

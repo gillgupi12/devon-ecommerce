@@ -1,6 +1,6 @@
 import ProductCard from '../../molecules/product-card';
 
-const profilePage: React.FC = () => {
+const productPage: React.FC = () => {
 
     return (
         <>
@@ -23,4 +23,4 @@ const profilePage: React.FC = () => {
     )
 }
 
-export default profilePage
+export default productPage
