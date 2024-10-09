@@ -1,10 +1,10 @@
-import '@mantine/core/styles.css';
-import './App.css'
 import { createTheme, MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
 import { Notifications } from '@mantine/notifications';
-import MainLayout from './layouts/main.tsx';
 import { Provider } from 'react-redux';
-import {store} from './stores/index.tsx';
+import './App.css';
+import MainLayout from './layouts/main.tsx';
+import { store } from './stores/index.tsx';
 
 
 const theme = createTheme({
@@ -20,12 +20,12 @@ const theme = createTheme({
 function App() {
   return (
     <Provider store={store}>
-    <div className='bg-slate-50  h-screen'>
-      <MantineProvider theme={{ colors: theme.colors, }} withGlobalClasses withCssVariables>
-        <Notifications />
-        <MainLayout />
-      </MantineProvider>
-    </div>
+      <div className='bg-slate-50  h-screen'>
+        <MantineProvider theme={{ colors: theme.colors, }} withGlobalClasses withCssVariables>
+          <Notifications />
+          <MainLayout />
+        </MantineProvider>
+      </div>
     </Provider>
   )
 }

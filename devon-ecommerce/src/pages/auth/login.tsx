@@ -1,15 +1,14 @@
-import {  TextInput } from '@mantine/core';
-import CustomButton from '../../atoms/button';
-import api from '../../../api/auth'
-import { Container } from '@mantine/core';
-import { Link } from 'react-router-dom';
+import { Container, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
-import { isLoginResponse } from '../../../utils/responses';
-import { useDispatch } from 'react-redux';
-import { login } from '../../../stores/authSlice';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import api from '../../api/auth'
+import { RootState } from '../../stores';
+import { login } from '../../stores/authSlice';
+import { isLoginResponse } from '../../utils/responses';
+import CustomButton from '../../components/atoms/button';
 
 
 const LoginPage: React.FC = () => {
@@ -17,6 +16,7 @@ const LoginPage: React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate()
+    const isAuthenticated = useSelector((state: RootState)=> state.auth.isAuthenticated)
 
     const form = useForm({
         mode: 'uncontrolled',
@@ -29,6 +29,12 @@ const LoginPage: React.FC = () => {
             password: (value) => value.length < 2 ? 'Please input password' : null,
         },
     });
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/');
+        }
+    }, [isAuthenticated, navigate]);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
@@ -59,6 +65,7 @@ const LoginPage: React.FC = () => {
 
                 }
             } catch (err) {
+                console.log(err)
                 setErrorMessage('An unexpected error occurred. Please try again later.');
             }
         }

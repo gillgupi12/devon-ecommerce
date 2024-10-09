@@ -9,6 +9,7 @@ const productDetails: React.FC = () => {
     return (
 
         <section className="py-12 sm:py-16"> 
+        {productId}
         <div className="container mx-auto px-4">
           <nav className="flex">
             <ol role="list" className="flex items-center">

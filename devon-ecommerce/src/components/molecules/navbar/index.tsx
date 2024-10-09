@@ -1,26 +1,40 @@
-import { Group, Button, Box, Burger, rem, Text, Menu, UnstyledButton, Avatar, useMantineTheme } from '@mantine/core';
+import { Avatar, Box, Burger, Button, Group, Menu, rem, Text, UnstyledButton, useMantineTheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import classes from './navbar.module.css';
-import { Link } from 'react-router-dom';
+import { notifications } from '@mantine/notifications';
 import { IconChevronDown, IconHeart, IconLogout, IconMessage, IconPlayerPause, IconSettings, IconStar, IconSwitchHorizontal, IconTrash } from '@tabler/icons-react';
-import { useState } from 'react';
 import cx from 'clsx';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../stores/index'
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../../../stores/authSlice';
+import { RootState } from '../../../stores/index';
+import classes from './navbar.module.css';
 
-// const user = {
-//     name: 'Jane Spoonfighter',
-//     email: 'janspoon@fighter.dev',
-//     image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
-// };
+
 
 const HeaderNavBar: React.FC = () => {
     const user = useSelector((state: RootState) => state.auth.user)
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
     const [drawerOpened, { toggle: toggleDrawer }] = useDisclosure(false);
     const [userMenuOpened, setUserMenuOpened] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const theme = useMantineTheme();
+
+
+    const handleLogout = () => {
+        dispatch(logout());
+        notifications.show({
+            title: 'Logged Out',
+            position:'top-right',
+            message: 'You have successfully logged out.',
+            color: 'green',
+        });
+        navigate('/login');
+
+
+    }
     return (
         <>
             <Box className="border-b py-2" bg={'white'}>
@@ -121,6 +135,7 @@ const HeaderNavBar: React.FC = () => {
                                             leftSection={
                                                 <IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
                                             }
+                                            onClick={handleLogout}
                                         >
                                             Logout
                                         </Menu.Item>

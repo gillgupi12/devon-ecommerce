@@ -1,12 +1,11 @@
-import { Group, TextInput } from '@mantine/core';
-import CustomButton from '../../atoms/button';
-import { Container } from '@mantine/core';
-import api from '../../../api/auth'
+import { Container, Group, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { notifications } from '@mantine/notifications';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { notifications } from '@mantine/notifications';
-import { isRegisterResponse } from '../../../utils/responses';
+import api from '../../api/auth';
+import { isRegisterResponse } from '../../utils/responses';
+import CustomButton from '../../components/atoms/button/index'
 
 const RegisterPage: React.FC = () => {
 
@@ -91,6 +90,7 @@ const RegisterPage: React.FC = () => {
                 }
 
             } catch (err) {
+                console.log(err)
                 setErrorMessage('An unexpected error occurred. Please try again later.');
                 notifications.show({
                     title: 'Error',
