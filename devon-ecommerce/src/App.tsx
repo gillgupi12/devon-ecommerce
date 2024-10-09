@@ -1,18 +1,10 @@
 import '@mantine/core/styles.css';
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginPage from './components/pages/auth/login.tsx';
-import RegisterPage from './components/pages/auth/register.tsx';
 import { createTheme, MantineProvider } from '@mantine/core';
-import { HeaderNavBar } from './components/molecules/navbar/index.tsx';
-import ForgotPasswordPage from './components/pages/auth/forgot-password.tsx';
-import ResetPasswordPage from './components/pages/auth/reset-password.tsx';
 import { Notifications } from '@mantine/notifications';
-import profilePage from './components/pages/user/profile.tsx';
-import productPage from './components/pages/product/index.tsx';
-import aboutPage from './components/pages/about/index.tsx';
-import contactPage from './components/pages/contact/index.tsx';
-import FooterComponent from './components/molecules/footer/index.tsx';
+import MainLayout from './layouts/main.tsx';
+import { Provider } from 'react-redux';
+import {store} from './stores/index.tsx';
 
 
 const theme = createTheme({
@@ -23,26 +15,18 @@ const theme = createTheme({
   },
 
 });
+
+
 function App() {
   return (
+    <Provider store={store}>
     <div className='bg-slate-50  h-screen'>
       <MantineProvider theme={{ colors: theme.colors, }} withGlobalClasses withCssVariables>
         <Notifications />
-        <BrowserRouter>
-          <HeaderNavBar />
-          <Routes>
-            <Route path="/login" Component={LoginPage} />
-            <Route path="/register" Component={RegisterPage} />
-            <Route path="/forgot-password" Component={ForgotPasswordPage} />
-            <Route path="/reset-password/:token" Component={ResetPasswordPage} />
-            <Route path="/profile/:userId" Component={profilePage} />
-            <Route path="/products" Component={productPage} />
-            <Route path="/about" Component={aboutPage} />
-            <Route path="/contact-us" Component={contactPage} />
-          </Routes>
-          <FooterComponent />
-        </BrowserRouter>
-      </MantineProvider></div>
+        <MainLayout />
+      </MantineProvider>
+    </div>
+    </Provider>
   )
 }
 

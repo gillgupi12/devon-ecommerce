@@ -1,33 +1,36 @@
-import { AppShell, Burger } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { AppShell  } from '@mantine/core';
+import HeaderNavBar from '../components/molecules/navbar';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import FooterComponent from '../components/molecules/footer';
+import { Suspense } from 'react';
+import { routes } from '../routes';
 
 function MainLayout() {
-    const [opened, { toggle }] = useDisclosure();
+    // const [opened, { toggle }] = useDisclosure();
 
     return (
+        <BrowserRouter>
         <AppShell
-            header={{ height: 60 }}
-            navbar={{
-                width: 300,
-                breakpoint: 'sm',
-                collapsed: { mobile: !opened },
-            }}
+            header={{ height: 50 }}
             padding="md"
         >
             <AppShell.Header>
-                <Burger
-                    opened={opened}
-                    onClick={toggle}
-                    hiddenFrom="sm"
-                    size="sm"
-                />
-                <div>Logo</div>
+                <AppShell.Section><HeaderNavBar/></AppShell.Section>
             </AppShell.Header>
+            <AppShell.Main>
 
-            <AppShell.Navbar p="md">Navbar</AppShell.Navbar>
-
-            <AppShell.Main>Main</AppShell.Main>
+            <Suspense fallback={<div>Loading...</div>}>
+                    <Routes>
+                        {routes.map(({ path, element }) => (
+                            <Route key={path} path={path} element={element} />
+                        ))}
+                    </Routes>
+                </Suspense>
+                    <FooterComponent />
+    
+            </AppShell.Main>
         </AppShell>
+        </BrowserRouter>
 
     )
 }
