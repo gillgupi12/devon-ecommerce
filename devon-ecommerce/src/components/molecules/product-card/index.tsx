@@ -1,7 +1,7 @@
 
-import classes from './product-card.module.css'
 import { Card, Image, Text, Group, Badge, Center, Button } from '@mantine/core';
 import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons-react';
+import classes from './product-card.module.css'
 
 const mockdata = [
     { label: '4 passengers', icon: IconUsers },

@@ -56,6 +56,7 @@ const ForgotPasswordPage: React.FC = () => {
 
                 }
             } catch (err) {
+                console.log(err)
                 setErrorMessage('An unexpected error occurred. Please try again later.');
                 notifications.show({
                     title: 'Error',

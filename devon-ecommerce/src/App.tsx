@@ -12,6 +12,7 @@ import profilePage from './components/pages/user/profile.tsx';
 import productPage from './components/pages/product/index.tsx';
 import aboutPage from './components/pages/about/index.tsx';
 import contactPage from './components/pages/contact/index.tsx';
+import FooterComponent from './components/molecules/footer/index.tsx';
 
 
 const theme = createTheme({
@@ -24,25 +25,24 @@ const theme = createTheme({
 });
 function App() {
   return (
-    <>
+    <div className='bg-slate-50  h-screen'>
       <MantineProvider theme={{ colors: theme.colors, }} withGlobalClasses withCssVariables>
         <Notifications />
         <BrowserRouter>
           <HeaderNavBar />
-          <div className='bg-slate-100 '>
-            <Routes>
-              <Route path="/login" Component={LoginPage} />
-              <Route path="/register" Component={RegisterPage} />
-              <Route path="/forgot-password" Component={ForgotPasswordPage} />
-              <Route path="/reset-password/:token" Component={ResetPasswordPage} />
-              <Route path="/profile/:userId" Component={profilePage} />
-              <Route path="/products" Component={productPage} />
-              <Route path="/about" Component={aboutPage} />
-              <Route path="/contact-us" Component={contactPage} />
-            </Routes>
-          </div>
+          <Routes>
+            <Route path="/login" Component={LoginPage} />
+            <Route path="/register" Component={RegisterPage} />
+            <Route path="/forgot-password" Component={ForgotPasswordPage} />
+            <Route path="/reset-password/:token" Component={ResetPasswordPage} />
+            <Route path="/profile/:userId" Component={profilePage} />
+            <Route path="/products" Component={productPage} />
+            <Route path="/about" Component={aboutPage} />
+            <Route path="/contact-us" Component={contactPage} />
+          </Routes>
+          <FooterComponent />
         </BrowserRouter>
-      </MantineProvider></>
+      </MantineProvider></div>
   )
 }
 
