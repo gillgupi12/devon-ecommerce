@@ -8,9 +8,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 import { isLoginResponse } from '../../../utils/responses';
+import { useDispatch } from 'react-redux';
+import { login } from '../../../stores/authSlice';
 
 
 const LoginPage: React.FC = () => {
+    const dispatch = useDispatch();
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate()
@@ -45,6 +48,7 @@ const LoginPage: React.FC = () => {
   
                 } else if(isLoginResponse(response)) {
                     setErrorMessage(null);
+                    dispatch(login(response.user));
                     navigate('/')
                     notifications.show({
                         title: 'Success',
@@ -79,7 +83,7 @@ const LoginPage: React.FC = () => {
                     <small className="text-red-500">{errorMessage}</small>
                     <div className='flex flex-row justify-between items-center justify-center'>
                         <Link to="/forgot-password" className='text-sm underline text-red-500'>Forgot Password?</Link>
-                        <CustomButton loading={loading} disabled={loading} type="submit" className='w-1/4' color={'black'} > {loading ? 'Logging in...' : 'Login'}</CustomButton>
+                        <CustomButton loading={loading} disabled={loading} type="submit" className='w-1/4' color={'blue'} > {loading ? 'Logging in...' : 'Login'}</CustomButton>
                     </div>
                 </form>
             </Container>
