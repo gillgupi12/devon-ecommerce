@@ -1,11 +1,5 @@
+const checkoutPage: React.FC = () => {
+  return <>Checkout Page</>;
+};
 
-
-const checkoutPage: React.FC = ()=>{
-    return (
-        <>
-        Contact Page
-        </>
-    )
-}
-
-export default checkoutPage
+export default checkoutPage;
