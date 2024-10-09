@@ -138,7 +138,7 @@ const RegisterPage: React.FC = () => {
                     />
                     <small className="text-red-500">{errorMessage}</small>
                     <Group justify='flex-end'>
-                        <CustomButton loading={loading} disabled={loading} type="submit" className='w-1/4' color={'black'} > {loading ? 'Registering..' : 'Register'}</CustomButton>
+                        <CustomButton loading={loading} disabled={loading} type="submit" className='w-1/4' color={'blue'} > {loading ? 'Registering..' : 'Register'}</CustomButton>
                     </Group>
 
                 </form>

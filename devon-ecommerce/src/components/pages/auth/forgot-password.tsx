@@ -81,7 +81,7 @@ const ForgotPasswordPage: React.FC = () => {
                     />
                      <small className="text-red-500">{errorMessage}</small>
                     <Group justify="flex-end">
-                    <CustomButton loading={loading} disabled={loading} type="submit"  color={'black'} > {loading ? 'Loading..' : 'Reset Password'}</CustomButton>
+                    <CustomButton loading={loading} disabled={loading} type="submit"  color={'blue'} > {loading ? 'Loading..' : 'Reset Password'}</CustomButton>
                     </Group>
 
                 </form>

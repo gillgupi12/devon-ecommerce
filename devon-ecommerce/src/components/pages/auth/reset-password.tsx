@@ -61,7 +61,7 @@ const ResetPasswordPage: React.FC = () => {
                         onChange={(event) => setConfirmPassword(event.target.value)}
                     />
                     <div className="flex justify-end">
-                        <CustomButton type="submit" color={'black'} >Reset Password</CustomButton>
+                        <CustomButton type="submit" color={'blue'} >Reset Password</CustomButton>
                     </div>
                 </form>
 
