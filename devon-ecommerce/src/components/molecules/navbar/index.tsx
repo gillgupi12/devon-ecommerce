@@ -5,18 +5,21 @@ import { Link } from 'react-router-dom';
 import { IconChevronDown, IconHeart, IconLogout, IconMessage, IconPlayerPause, IconSettings, IconStar, IconSwitchHorizontal, IconTrash } from '@tabler/icons-react';
 import { useState } from 'react';
 import cx from 'clsx';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../stores/index'
 
-const user = {
-    name: 'Jane Spoonfighter',
-    email: 'janspoon@fighter.dev',
-    image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
-};
+// const user = {
+//     name: 'Jane Spoonfighter',
+//     email: 'janspoon@fighter.dev',
+//     image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
+// };
 
-export function HeaderNavBar() {
+const HeaderNavBar: React.FC = () => {
+    const user = useSelector((state: RootState) => state.auth.user)
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
     const [drawerOpened, { toggle: toggleDrawer }] = useDisclosure(false);
-
     const [userMenuOpened, setUserMenuOpened] = useState(false);
-    const [isLoggedIn] = useState(false)
+
     const theme = useMantineTheme();
     return (
         <>
@@ -28,19 +31,16 @@ export function HeaderNavBar() {
                             <Text size='lg' fw={900}
                                 variant="gradient"
                                 gradient={{ from: 'blue', to: 'cyan', deg: 90 }}>DevonDemo</Text>
-
                         </Group>
 
                         <Group visibleFrom="sm"  >
-                            <Link to="/products"> Shop All </Link>
-                            <Link to="/products"> Cars </Link>
-                            <Link to="/products"> Bikes </Link>
-                            <Link to="/contact-us"> Contact Us </Link>
+                            <Link to="/products"> Shop </Link>
+                            <Link to="/contact-us"> Contact </Link>
                             <Link to="/about"> About </Link>
                         </Group>
 
                         <Group visibleFrom="sm" justify='end'>
-                            {!isLoggedIn ? (
+                            {!isAuthenticated ? (
                                 <Group gap={4}>
                                     <Link to="/login"> <Button variant='default'>Login</Button></Link>
                                     <Link to="/register"> <Button variant="filled" color='blue'>Sign Up</Button></Link>
@@ -59,9 +59,9 @@ export function HeaderNavBar() {
                                             className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
                                         >
                                             <Group gap={7}>
-                                                <Avatar src={user.image} alt={user.name} radius="xl" size={20} />
+                                                <Avatar src={user?.profilePictureUrl} alt={user?.firstName} radius="xl" size={20} />
                                                 <Text fw={500} size="sm" lh={1} mr={3}>
-                                                    {user.name}
+                                                    {user?.userName}
                                                 </Text>
                                                 <IconChevronDown style={{ width: rem(12), height: rem(12) }} stroke={1.5} />
                                             </Group>
@@ -154,3 +154,5 @@ export function HeaderNavBar() {
         </>
     );
 }
+
+export default HeaderNavBar
