@@ -1,5 +1,9 @@
 .card {
   background-color: var(--mantine-color-body);
+  cursor: pointer;
+}
+.card:hover {
+  background-color: rgb(1, 1, 1, 0.05);
 }
 
 .imageSection {

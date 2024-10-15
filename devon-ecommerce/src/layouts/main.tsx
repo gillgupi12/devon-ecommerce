@@ -10,7 +10,7 @@ function MainLayout() {
 
   return (
     <BrowserRouter>
-      <AppShell header={{ height: 50 }} padding="md">
+      <AppShell header={{ height: 50 }}>
         <AppShell.Header>
           <AppShell.Section>
             <HeaderNavBar />

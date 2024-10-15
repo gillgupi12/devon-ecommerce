@@ -4,7 +4,7 @@ const ProductDetails: React.FC = () => {
   const { productId } = useParams();
 
   return (
-    <section className="py-12 sm:py-16">
+    <section className="py-12 sm:py-16 bg-slate-50">
       {productId}
       <div className="container mx-auto px-4">
         <nav className="flex">
@@ -105,9 +105,7 @@ const ProductDetails: React.FC = () => {
           </div>
 
           <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-            <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">
-              Afro-Brazillian Coffee
-            </h1>
+            <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">Tesla</h1>
 
             <div className="mt-5 flex items-center">
               <div className="flex items-center">

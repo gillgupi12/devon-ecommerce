@@ -1,28 +1,7 @@
-import {
-  Avatar,
-  Box,
-  Burger,
-  Button,
-  Group,
-  Menu,
-  rem,
-  Text,
-  UnstyledButton,
-  useMantineTheme,
-} from "@mantine/core";
+import { Avatar, Box, Burger, Button, Group, Menu, rem, Text, UnstyledButton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
-import {
-  IconChevronDown,
-  IconHeart,
-  IconLogout,
-  IconMessage,
-  IconPlayerPause,
-  IconSettings,
-  IconStar,
-  IconSwitchHorizontal,
-  IconTrash,
-} from "@tabler/icons-react";
+import { IconChevronDown, IconLogout, IconSettings } from "@tabler/icons-react";
 import cx from "clsx";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,8 +18,6 @@ const HeaderNavBar: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const theme = useMantineTheme();
-
   const handleLogout = () => {
     dispatch(logout());
     notifications.show({
@@ -53,7 +30,7 @@ const HeaderNavBar: React.FC = () => {
   };
   return (
     <>
-      <Box className="border-b py-2" bg={"white"}>
+      <Box className="border-b py-3" bg={"white"}>
         <header className={classes.header}>
           <Group justify="space-between" wrap="nowrap">
             <Group>
@@ -115,58 +92,16 @@ const HeaderNavBar: React.FC = () => {
                     </UnstyledButton>
                   </Menu.Target>
                   <Menu.Dropdown>
-                    <Menu.Item
-                      leftSection={
-                        <IconHeart
-                          style={{ width: rem(16), height: rem(16) }}
-                          color={theme.colors.red[6]}
-                          stroke={1.5}
-                        />
-                      }
-                    >
-                      Liked posts
-                    </Menu.Item>
-                    <Menu.Item
-                      leftSection={
-                        <IconStar
-                          style={{ width: rem(16), height: rem(16) }}
-                          color={theme.colors.yellow[6]}
-                          stroke={1.5}
-                        />
-                      }
-                    >
-                      Saved posts
-                    </Menu.Item>
-                    <Menu.Item
-                      leftSection={
-                        <IconMessage
-                          style={{ width: rem(16), height: rem(16) }}
-                          color={theme.colors.blue[6]}
-                          stroke={1.5}
-                        />
-                      }
-                    >
-                      Your comments
-                    </Menu.Item>
-
                     <Menu.Label>Settings</Menu.Label>
-                    <Menu.Item
-                      leftSection={
-                        <IconSettings style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-                      }
-                    >
-                      Account settings
-                    </Menu.Item>
-                    <Menu.Item
-                      leftSection={
-                        <IconSwitchHorizontal
-                          style={{ width: rem(16), height: rem(16) }}
-                          stroke={1.5}
-                        />
-                      }
-                    >
-                      Change account
-                    </Menu.Item>
+                    <Link to={`/profile/${user?._id}`}>
+                      <Menu.Item
+                        leftSection={
+                          <IconSettings style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+                        }
+                      >
+                        Account Settings
+                      </Menu.Item>
+                    </Link>
                     <Menu.Item
                       leftSection={
                         <IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
@@ -174,25 +109,6 @@ const HeaderNavBar: React.FC = () => {
                       onClick={handleLogout}
                     >
                       Logout
-                    </Menu.Item>
-
-                    <Menu.Divider />
-
-                    <Menu.Label>Danger zone</Menu.Label>
-                    <Menu.Item
-                      leftSection={
-                        <IconPlayerPause style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-                      }
-                    >
-                      Pause subscription
-                    </Menu.Item>
-                    <Menu.Item
-                      color="red"
-                      leftSection={
-                        <IconTrash style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-                      }
-                    >
-                      Delete account
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>

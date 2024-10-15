@@ -1,6 +1,7 @@
 import { Card, Image, Text, Group, Badge, Center, Button } from "@mantine/core";
 import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from "@tabler/icons-react";
 import classes from "./product-card.module.css";
+import { useNavigate } from "react-router-dom";
 
 const mockdata = [
   { label: "4 passengers", icon: IconUsers },
@@ -17,8 +18,13 @@ const ProductCard = () => {
     </Center>
   ));
 
+  const navigate = useNavigate();
+  const redirectToProduct = () => {
+    navigate(`/products/1`);
+  };
+
   return (
-    <Card withBorder radius="md" className={classes.card}>
+    <Card withBorder radius="md" className={classes.card} onClick={redirectToProduct}>
       <Card.Section className={classes.imageSection}>
         <Image src="https://i.imgur.com/ZL52Q2D.png" alt="Tesla Model S" />
       </Card.Section>

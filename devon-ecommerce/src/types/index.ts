@@ -11,6 +11,7 @@ export interface Address {
   country: string;
 }
 export interface User {
+  _id: string;
   firstName: string;
   lastName: string;
   userName: string;
