@@ -4,7 +4,8 @@ import { Notifications } from "@mantine/notifications";
 import { Provider } from "react-redux";
 import "./App.css";
 import MainLayout from "./layouts/main.tsx";
-import { store } from "./stores/index.tsx";
+import { store, persistor } from "./stores/index.tsx";
+import { PersistGate } from "redux-persist/integration/react";
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -39,12 +40,14 @@ const theme = createTheme({
 function App() {
   return (
     <Provider store={store}>
-      <div className="bg-slate-50  h-screen">
-        <MantineProvider theme={{ colors: theme.colors }} withGlobalClasses withCssVariables>
-          <Notifications />
-          <MainLayout />
-        </MantineProvider>
-      </div>
+      <PersistGate loading={null} persistor={persistor}>
+        <div className="bg-slate-50  h-screen">
+          <MantineProvider theme={{ colors: theme.colors }} withGlobalClasses withCssVariables>
+            <Notifications />
+            <MainLayout />
+          </MantineProvider>
+        </div>
+      </PersistGate>
     </Provider>
   );
 }
